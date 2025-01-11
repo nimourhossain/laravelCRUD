@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('age');
             $table->string('address');
             $table->string('disease');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
