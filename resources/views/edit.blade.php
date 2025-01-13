@@ -26,7 +26,7 @@
     <div class="container">
         <!-- Header Section -->
         <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-semibold text-gray-800">Update Patient Information</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">Update Information - {{$ourPost->name}}</h2>
             <a href="/" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500 transition duration-200">Back to Home</a>
         </div>
 

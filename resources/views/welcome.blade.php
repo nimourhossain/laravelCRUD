@@ -50,11 +50,12 @@
 </head>
 <body>
     <div class="container">
+        <!-- Existing Content -->
         <div class="flex justify-between items-center my-5">
             <h2>Patient Management</h2>
             <a href="/create" class="button">Add New Patient</a>
         </div>
-        
+
         @if(session('success'))
             <div class="alert" role="alert">
                 <strong>Success!</strong>
@@ -87,11 +88,14 @@
                                     <td class="table-cell">{{$post->address}}</td>
                                     <td class="table-cell">{{$post->disease}}</td>
                                     <td class="table-cell">
-                                        <img src="images/{{$post->image}}" alt="{{$post->name}}'s image" class="h-16 w-16 object-cover rounded-md shadow-sm">
-                                        <td class="table-cell text-right">
-    <a href="{{ route('edit', $post->id) }}" class="edit-delete-links bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500 transition duration-200 mr-2">Edit</a>
-    <a href="{{ route('delete', $post->id) }}" class="edit-delete-links bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition duration-200">Delete</a>
-</td>
+                                        <img src="images/{{$post->image}}" alt="{{$post->name}}'s image"
+                                             class="h-16 w-16 object-cover rounded-md shadow-sm cursor-pointer"
+                                             onclick="showModal('images/{{$post->image}}')">
+                                    </td>
+                                    <td class="table-cell text-right">
+                                        <a href="{{ route('edit', $post->id) }}" class="edit-delete-links bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500 transition duration-200 mr-2">Edit</a>
+                                        <a href="{{ route('delete', $post->id) }}" class="edit-delete-links bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500 transition duration-200">Delete</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -102,6 +106,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal for Image Viewer -->
+        <div id="imageModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50">
+            <div class="relative">
+                <img id="modalImage" class="max-w-full max-h-screen rounded-lg shadow-lg">
+                <button onclick="closeModal()"
+                        class="absolute top-2 right-2 text-white bg-red-600 px-4 py-2 rounded-lg shadow-md hover:bg-red-500">
+                    Close
+                </button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Show modal and display clicked image
+        function showModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.classList.remove('hidden');
+        }
+
+        // Close the modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+        }
+    </script>
 </body>
+
 </html>
